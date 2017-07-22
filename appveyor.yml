@@ -41,9 +41,6 @@ artifacts:
   - path: '\*_*.tar.gz'
     name: Bits
 
-  - path: '\*_*.zip'
-    name: Bits
-
 environment:
     USE_RTOOLS: true
     R_ARCH: x64
