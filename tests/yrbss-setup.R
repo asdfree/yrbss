@@ -1,4 +1,4 @@
-print( Sys.getenv( "my_email_address" ) )
+stopifnot( "ajdamico@gmail.com" == Sys.getenv( "my_email_address" ) )
 
 machine_specific_replacements <- 
 	list( 
@@ -12,3 +12,4 @@ machine_specific_replacements <-
 	)
 
 source( lodown::syntaxtractor( "yrbss" , replacements = machine_specific_replacements , setup_test = "setup" ) , echo = TRUE )
+
