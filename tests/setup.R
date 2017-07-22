@@ -1,5 +1,3 @@
-stopifnot( "ajdamico@gmail.com" == Sys.getenv( "my_email_address" ) )
-
 machine_specific_replacements <- 
 	list( 
 		

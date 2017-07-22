@@ -18,4 +18,3 @@ after_failure:
 r_github_packages:
  - jimhester/archive
  - ajdamico/lodown
- 
