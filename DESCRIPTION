@@ -4,7 +4,7 @@ Title: yrbss
 Version: 0.1.0
 Author: Anthony Joseph Damico
 Maintainer: Anthony Joseph Damico <ajdamico@gmail.com>
-Description: A continuous integration package, tested on  ajdamico/lodown commit f760dbdb1f09287d39bad4c03683c0dc6ddb5990
+Description: A continuous integration package, tested on ajdamico/asdfree commit 4cd8b19f679ba6e3494f2c55c287a114ed066f4f ajdamico/lodown commit f760dbdb1f09287d39bad4c03683c0dc6ddb5990
 License: GPL-3
 Imports: survey, lodown, srvyr
 Encoding: UTF-8
