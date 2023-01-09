@@ -9,4 +9,4 @@ License: GPL-3
 Imports: survey, srvyr
 Encoding: UTF-8
 LazyData: true
-Remotes: ajdamico/lodown
+desc_remotes_line
