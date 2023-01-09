@@ -3,17 +3,17 @@
 # options("lodown.cachaca.savecache"=FALSE)
 
 library(lodown)
-lodown( "yrbss" , output_dir = file.path( getwd() ) )
+lodown( "yrbss" , output_dir = file.path( getwd() ) lodown_ )
 library(lodown)
 # examine all available YRBSS microdata files
 yrbss_cat <-
 	get_catalog( "yrbss" ,
-		output_dir = file.path( getwd() ) )
+		output_dir = file.path( getwd() ) get_catalog_ )
 
 # 2015 only
 yrbss_cat <- subset( yrbss_cat , year == 2015 )
 # download the microdata to your local computer
-yrbss_cat <- lodown( "yrbss" , yrbss_cat )
+yrbss_cat <- lodown( "yrbss" , yrbss_cat lodown_ )
 
 library(survey)
 
