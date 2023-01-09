@@ -1,5 +1,7 @@
 
 
+library(survey)
+
 yrbss_df <- readRDS( file.path( getwd() , "2015 main.rds" ) )
 
 yrbss_design <- 
