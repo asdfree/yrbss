@@ -13,7 +13,7 @@ yrbss_cat <-
 # 2015 only
 yrbss_cat <- subset( yrbss_cat , year == 2015 )
 # download the microdata to your local computer
-
+yrbss_cat <- lodown( "yrbss" , yrbss_cat )
 
 library(survey)
 
