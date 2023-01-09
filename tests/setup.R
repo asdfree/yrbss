@@ -1,6 +1,3 @@
-# if ( .Platform$OS.type == 'windows' ) memory.limit( 256000 )
-
-# options("lodown.cachaca.savecache"=FALSE)
 
 
 yrbss_df <- readRDS( file.path( getwd() , "2015 main.rds" ) )
