@@ -1,17 +1,6 @@
 
 
-library(survey)
 
-yrbss_df <- readRDS( file.path( getwd() , "2015 main.rds" ) )
-
-yrbss_design <- 
-	svydesign( 
-		~ psu , 
-		strata = ~ stratum , 
-		data = yrbss_df , 
-		weights = ~ weight , 
-		nest = TRUE 
-	)
 yrbss_design <- 
 	update( 
 		yrbss_design , 
