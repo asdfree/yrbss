@@ -155,21 +155,40 @@ yrbss_srvyr_design %>%
 	group_by( ever_used_marijuana ) %>%
 	summarize( mean = survey_mean( bmipct , na.rm = TRUE ) )
 
-unwtd_count_result <- unwtd.count( ~ never_rarely_wore_seat_belt , yrbss_design )
+unwtd_count_result <-
+	unwtd.count( ~ never_rarely_wore_seat_belt , yrbss_design )
 
 stopifnot( coef( unwtd_count_result ) == 11149 )
 
-wtd_n_result <- svytotal( ~ one , subset( yrbss_design , !is.na( never_rarely_wore_seat_belt ) ) )
+wtd_n_result <-
+	svytotal( 
+		~ one , 
+		subset(
+			yrbss_design , 
+			!is.na( never_rarely_wore_seat_belt ) 
+		)
+	)
 
 stopifnot( round( coef( wtd_n_result ) , 0 ) == 12132 )
 
-share_result <- svymean( ~ never_rarely_wore_seat_belt , yrbss_design , na.rm = TRUE )
+share_result <-
+	svymean(
+		~ never_rarely_wore_seat_belt ,
+		yrbss_design ,
+		na.rm = TRUE 
+	)
 
 stopifnot( round( coef( share_result ) , 4 ) == .0654 )
 
 stopifnot( round( SE( share_result ) , 4 ) == .0065 )
 
-ci_result <- svyciprop( ~ never_rarely_wore_seat_belt , yrbss_design , na.rm = TRUE , method = "beta" )
+ci_result <-
+	svyciprop(
+		~ never_rarely_wore_seat_belt ,
+		yrbss_design , 
+		na.rm = TRUE ,
+		method = "beta"
+	)
 
 stopifnot( round( confint( ci_result )[1] , 4 ) == 0.0529 )
 
