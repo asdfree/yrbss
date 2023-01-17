@@ -96,9 +96,7 @@ svyby(
 	yrbss_design , 
 	svyquantile , 
 	0.5 ,
-	ci = TRUE ,
-	keep.var = TRUE ,
-	na.rm = TRUE
+	ci = TRUE , na.rm = TRUE
 )
 svyratio( 
 	numerator = ~ tried_to_quit_tobacco_past_year , 
