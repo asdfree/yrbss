@@ -50,6 +50,9 @@ yrbss_df <- read.SAScii( dat_tf , sas_tf )
 names( yrbss_df ) <- tolower( names( yrbss_df ) )
 
 yrbss_df[ , 'one' ] <- 1
+# yrbss_fn <- file.path( path.expand( "~" ) , "YRBSS" , "this_file.rds" )
+# saveRDS( yrbss_df , file = yrbss_fn , compress = FALSE )
+# yrbss_df <- readRDS( yrbss_fn )
 library(survey)
 
 yrbss_design <- 
