@@ -50,7 +50,6 @@ yrbss_df <- read.SAScii( dat_tf , sas_tf )
 names( yrbss_df ) <- tolower( names( yrbss_df ) )
 
 yrbss_df[ , 'one' ] <- 1
-
 library(survey)
 
 yrbss_design <- 
