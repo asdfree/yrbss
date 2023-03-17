@@ -149,14 +149,6 @@ glm_result <-
 	)
 
 summary( glm_result )
-library(srvyr)
-yrbss_srvyr_design <- as_survey( yrbss_design )
-yrbss_srvyr_design %>%
-	summarize( mean = survey_mean( bmipct , na.rm = TRUE ) )
-
-yrbss_srvyr_design %>%
-	group_by( ever_used_marijuana ) %>%
-	summarize( mean = survey_mean( bmipct , na.rm = TRUE ) )
 
 unwtd_count_result <-
 	unwtd.count( ~ never_rarely_wore_seat_belt , yrbss_design )
@@ -196,3 +188,11 @@ ci_result <-
 stopifnot( round( confint( ci_result )[1] , 4 ) == 0.0529 )
 
 stopifnot( round( confint( ci_result )[2] , 2 ) == 0.08 )
+library(srvyr)
+yrbss_srvyr_design <- as_survey( yrbss_design )
+yrbss_srvyr_design %>%
+	summarize( mean = survey_mean( bmipct , na.rm = TRUE ) )
+
+yrbss_srvyr_design %>%
+	group_by( ever_used_marijuana ) %>%
+	summarize( mean = survey_mean( bmipct , na.rm = TRUE ) )
