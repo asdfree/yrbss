@@ -4,7 +4,7 @@
 library(SAScii)
 
 sas_url <-
-	"https://www.cdc.gov/healthyyouth/data/yrbs/files/2019/2019XXH-SAS-Input-Program.sas"
+	"https://www.cdc.gov/yrbs/files/2023/2023XXH_SAS_Input_Program.sas"
 
 sas_text <- tolower( readLines( sas_url ) )
 
@@ -41,7 +41,7 @@ writeLines( sas_text , sas_tf )
 dat_tf <- tempfile()
 
 dat_url <-
-	"https://www.cdc.gov/healthyyouth/data/yrbs/files/2019/XXH2019_YRBS_Data.dat"
+	"https://www.cdc.gov/yrbs/files/2023/XXH2023_YRBS_Data.dat"
 	
 download.file( dat_url , dat_tf , mode = 'wb' )
 
@@ -66,11 +66,10 @@ yrbss_design <-
 yrbss_design <- 
 	update( 
 		yrbss_design , 
-		q2 = q2 ,
-		never_rarely_wore_seat_belt = as.numeric( qn8 == 1 ) ,
-		ever_used_marijuana = as.numeric( qn45 == 1 ) ,
-		tried_to_quit_tobacco_past_year = as.numeric( q39 == 2 ) ,
-		used_tobacco_past_year = as.numeric( q39 > 1 )
+		did_not_always_wear_seat_belt = as.numeric( qn8 == 1 ) ,
+		ever_used_marijuana = as.numeric( qn46 == 1 ) ,
+		tried_to_quit_tobacco_past_year = as.numeric( qn40 == 1 ) ,
+		used_tobacco_past_year = as.numeric( q40 > 1 )
 	)
 sum( weights( yrbss_design , "sampling" ) != 0 )
 
@@ -135,59 +134,58 @@ svymean( ~ bmipct , yrbss_design , na.rm = TRUE , deff = TRUE )
 
 # SRS with replacement
 svymean( ~ bmipct , yrbss_design , na.rm = TRUE , deff = "replace" )
-svyciprop( ~ never_rarely_wore_seat_belt , yrbss_design ,
+svyciprop( ~ did_not_always_wear_seat_belt , yrbss_design ,
 	method = "likelihood" , na.rm = TRUE )
-svyttest( bmipct ~ never_rarely_wore_seat_belt , yrbss_design )
+svyttest( bmipct ~ did_not_always_wear_seat_belt , yrbss_design )
 svychisq( 
-	~ never_rarely_wore_seat_belt + q2 , 
+	~ did_not_always_wear_seat_belt + q2 , 
 	yrbss_design 
 )
 glm_result <- 
 	svyglm( 
-		bmipct ~ never_rarely_wore_seat_belt + q2 , 
+		bmipct ~ did_not_always_wear_seat_belt + q2 , 
 		yrbss_design 
 	)
 
 summary( glm_result )
 
 unwtd_count_result <-
-	unwtd.count( ~ never_rarely_wore_seat_belt , yrbss_design )
+	unwtd.count( ~ did_not_always_wear_seat_belt , yrbss_design )
 
-stopifnot( coef( unwtd_count_result ) == 11149 )
+stopifnot( coef( unwtd_count_result ) == 15071 )
 
 wtd_n_result <-
 	svytotal( 
 		~ one , 
 		subset(
 			yrbss_design , 
-			!is.na( never_rarely_wore_seat_belt ) 
+			!is.na( did_not_always_wear_seat_belt ) 
 		)
 	)
 
-stopifnot( round( coef( wtd_n_result ) , 0 ) == 12132 )
+stopifnot( round( coef( wtd_n_result ) , 0 ) == 16917 )
 
 share_result <-
 	svymean(
-		~ never_rarely_wore_seat_belt ,
+		~ did_not_always_wear_seat_belt ,
 		yrbss_design ,
 		na.rm = TRUE 
 	)
 
-stopifnot( round( coef( share_result ) , 4 ) == .0654 )
+stopifnot( round( coef( share_result ) , 4 ) == .3958 )
 
-stopifnot( round( SE( share_result ) , 4 ) == .0065 )
+stopifnot( round( SE( share_result ) , 4 ) == .0172 )
 
 ci_result <-
 	svyciprop(
-		~ never_rarely_wore_seat_belt ,
+		~ did_not_always_wear_seat_belt ,
 		yrbss_design , 
-		na.rm = TRUE ,
-		method = "beta"
+		na.rm = TRUE
 	)
 
-stopifnot( round( confint( ci_result )[1] , 4 ) == 0.0529 )
+stopifnot( round( confint( ci_result )[1] , 4 ) == 0.3621 )
 
-stopifnot( round( confint( ci_result )[2] , 2 ) == 0.08 )
+stopifnot( round( confint( ci_result )[2] , 4 ) == 0.4304 )
 library(srvyr)
 yrbss_srvyr_design <- as_survey( yrbss_design )
 yrbss_srvyr_design %>%
