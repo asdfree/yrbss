@@ -1,11 +1,11 @@
-Package: chapter_tag
+Package: yrbss
 Type: Package
-Title: chapter_tag
+Title: yrbss
 Version: 1.0.0
 Author: Anthony Joseph Damico
 Maintainer: Anthony Joseph Damico <ajdamico@gmail.com>
 Description: A continuous integration dummy package.
 License: GPL-3
-Imports: needed_libraries
+Imports: SAScii, survey, srvyr
 Encoding: UTF-8
 LazyData: true
